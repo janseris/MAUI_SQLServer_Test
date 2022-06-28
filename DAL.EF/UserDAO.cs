@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DAL.EFCore
 {
-    public class UserDAO : IUserDAO
+    public class UserDAO : UserDAOBase
     {
         public int GetUsersCount(string connectionString)
         {

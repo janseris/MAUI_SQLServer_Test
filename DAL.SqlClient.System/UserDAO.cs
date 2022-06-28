@@ -4,7 +4,7 @@ using System.Data.SqlClient;
 
 namespace DAL.SqlClient.System
 {
-    public class UserDAO : IUserDAO
+    public class UserDAO : UserDAOBase
     {
         public int GetUsersCount(string connectionString)
         {
