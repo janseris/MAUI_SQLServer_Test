@@ -33,9 +33,10 @@ public partial class MainPage : ContentPage
         {
             dao.GetUsersCount(connectionString);
             return "success";
-        } catch (Exception ex)
+        }
+        catch (Exception ex)
         {
-            if(ex.Message == Constants.AndroidSqlClientBugMessage)
+            if (ex.Message == Constants.AndroidSqlClientBugMessage)
             {
                 return "Android connection bug";
             }
@@ -49,7 +50,7 @@ public partial class MainPage : ContentPage
 
     private static string GetExceptionMessage(Exception ex)
     {
-        if(ex is Microsoft.Data.SqlClient.SqlException)
+        if (ex is Microsoft.Data.SqlClient.SqlException)
         {
             var sex = ex as Microsoft.Data.SqlClient.SqlException;
             return $"{sex.GetType()} Class: {sex.Class}, Number: {sex.Number}, Message: {sex.Message}";
@@ -62,9 +63,24 @@ public partial class MainPage : ContentPage
         return $"{ex.GetType()}, {ex.Message}";
     }
 
-    private void OnCounterClicked(object sender, EventArgs e)
+    private void button_Clicked(object sender, EventArgs e)
     {
-        
+        results.Children.Clear();
+
+        var connectionString = Constants.LocalNetworkConnectionString;
+        connectionString += "TrustServerCertificate=true"; //skip certificate validation
+
+        foreach (var dao in DAOs)
+        {
+            var result = ExecuteDAO(dao, connectionString);
+            var text = $"{dao.Name}: {result}";
+            results.Add(new Label()
+            {
+                HorizontalOptions = LayoutOptions.Center,
+                Text = text,
+                Margin = new Thickness(0, 10)
+            });
+        }
     }
 }
 

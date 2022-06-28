@@ -8,7 +8,7 @@ namespace DAL.EFCore.Preview
 {
     public class UserDAO : UserDAOBase
     {
-        public int GetUsersCount(string connectionString)
+        public override int GetUsersCount(string connectionString)
         {
             DbContextOptionsBuilder<OrdinaceContext> builder = new DbContextOptionsBuilder<OrdinaceContext>();
             builder.UseSqlServer(connectionString);

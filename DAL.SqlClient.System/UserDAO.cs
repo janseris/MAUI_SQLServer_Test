@@ -6,7 +6,7 @@ namespace DAL.SqlClient.System
 {
     public class UserDAO : UserDAOBase
     {
-        public int GetUsersCount(string connectionString)
+        public override int GetUsersCount(string connectionString)
         {
             using (var connection = new SqlConnection(connectionString))
             {
