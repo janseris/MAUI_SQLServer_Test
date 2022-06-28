@@ -2,7 +2,7 @@
 
 using System.Diagnostics;
 
-using static System.Net.Mime.MediaTypeNames;
+using UIHelper;
 
 namespace MauiApp11;
 
@@ -11,62 +11,18 @@ public partial class MainPage : ContentPage
     public MainPage()
     {
         InitializeComponent();
-
-        DAOs = new List<UserDAOBase>
-        {
-            EFCore6DAO, EFCore7PreviewDAO,
-            microsoftSqlClientOldVersionDAO, microsoftSqlClientCurrentVersionDAO, microsoftSqlClientPreviewVersionDAO,
-            systemSqlClientVersionDAO
-        };
     }
 
-    private readonly UserDAOBase EFCore6DAO = new DAL.EFCore.UserDAO() { Name = "Microsoft.Data.SqlClient 2.1.4 (EF Core 6.0.6)" };
-    private readonly UserDAOBase EFCore7PreviewDAO = new DAL.EFCore.Preview.UserDAO() { Name = "Microsoft.Data.SqlClient 5.0.0-preview2.22096.2 (EF Core 7.0.0-preview.5.22302.2)" };
-
-    private readonly UserDAOBase microsoftSqlClientOldVersionDAO = new DAL.SqlClient.Microsoft.OldVersion.UserDAO() { Name = "Microsoft.Data.SqlClient 4.1.0" };
-    private readonly UserDAOBase microsoftSqlClientCurrentVersionDAO = new DAL.SqlClient.Microsoft.UserDAO() { Name = "Microsoft.Data.SqlClient 2.0.0" };
-    private readonly UserDAOBase microsoftSqlClientPreviewVersionDAO = new DAL.SqlClient.Microsoft.Preview.UserDAO() { Name = "Microsoft.Data.SqlClient 5.0.0-preview3.22168.1" };
-
-    private readonly UserDAOBase systemSqlClientVersionDAO = new DAL.SqlClient.Microsoft.Preview.UserDAO() { Name = "System.Data.SqlClient 4.8.3" };
-
-    public List<UserDAOBase> DAOs { get; }
-
-    private string ExecuteDAO(UserDAOBase dao, string connectionString)
+    private void ExecuteDAOWithUIResult(UserDAOBase dao, string connectionString, StackLayout results)
     {
-        try
+        var result = DAOsHelper.ExecuteDAO(dao, connectionString);
+        var text = $"{dao.Name}: {result}";
+        results.Add(new Label()
         {
-            dao.GetUsersCount(connectionString);
-            return "success";
-        }
-        catch (Exception ex)
-        {
-            if (ex.Message == Constants.AndroidSqlClientBugMessage)
-            {
-                return "Android connection bug";
-            }
-            if (ex.Message == Constants.ConnectionFailedAndroidMessage || ex.Message == Constants.ConnectionFailedWindowsMessage)
-            {
-                return "Connection failed, check internet and connection string and server configuration (accessibility from outside world)";
-            }
-            return GetExceptionMessage(ex);
-        }
-    }
-
-    private static string GetExceptionMessage(Exception ex)
-    {
-        if (ex is Microsoft.Data.SqlClient.SqlException)
-        {
-            var sex = ex as Microsoft.Data.SqlClient.SqlException;
-            return $"{sex.GetType()} Class: {sex.Class}, Number: {sex.Number}, Message: {sex.Message}";
-        }
-#if WINDOWS
-        if (ex is System.Data.SqlClient.SqlException) //why not available on Android?
-        {
-            var sex = ex as Microsoft.Data.SqlClient.SqlException;
-            return $"{sex.GetType()} Class: {sex.Class}, Number: {sex.Number}, Message: {sex.Message}";
-        }
-#endif
-        return $"{ex.GetType()}, {ex.Message}";
+            HorizontalOptions = LayoutOptions.Center,
+            Text = text,
+            Margin = new Thickness(0, 10)
+        });
     }
 
     private void button_Clicked(object sender, EventArgs e)
@@ -81,29 +37,30 @@ public partial class MainPage : ContentPage
 
         results.Children.Add(progressLabel);
 
-        var connectionString = Constants.LocalNetworkConnectionString;
-        connectionString += "TrustServerCertificate=true"; //skip certificate validation
+        var connectionString = Constants.WindowsConnectionString;
+        //skip certificate validation - why is this or Encrypt=false needed in MAUI (even for integrated security = Windows authentication)
+        //but not needed in WinForms or Blazor (non-MAUI) at all?
+        //this does not help on the Android issue
+        //connectionString += "TrustServerCertificate=true;"; 
+        
+        //with this, Windows authentication and also SQL authentication on Windows
+        //does not require a trusted certificate for the (local) SQL Server (Express)
+        //on Android, this does not solve the pre-login handshake problem
+        connectionString += "Encrypt=false;";
+
+        var DAOs = DAOsHelper.DAOs;
 
         foreach (var dao in DAOs)
         {
-            progressLabel.Text = $"Executing {dao.Name}...";
-            var result = ExecuteDAO(dao, connectionString);
-            var text = $"{dao.Name}: {result}";
-            results.Add(new Label()
-            {
-                HorizontalOptions = LayoutOptions.Center,
-                Text = text,
-                Margin = new Thickness(0, 10)
-            });
+            Trace.WriteLine($"Executing {dao.Name}...");
+            ExecuteDAOWithUIResult(dao, connectionString, results);
         }
-
+        
         //these texts should be displayed below the button
         foreach(var label in results.Children)
         {
             Trace.WriteLine((label as Label).Text);
         }
-
-        progressLabel.Text = "Finished";
     }
 }
 

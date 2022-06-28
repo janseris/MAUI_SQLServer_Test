@@ -56,6 +56,7 @@
 	  <ProjectReference Include="..\DAL.SqlClient.Microsoft.Preview\DAL.SqlClient.Microsoft.Preview.csproj" />
 	  <ProjectReference Include="..\DAL.SqlClient.Microsoft\DAL.SqlClient.Microsoft.csproj" />
 	  <ProjectReference Include="..\DAL.SqlClient.System\DAL.SqlClient.System.csproj" />
+	  <ProjectReference Include="..\UIHelper\UIHelper.csproj" />
 	</ItemGroup>
 
 </Project>
