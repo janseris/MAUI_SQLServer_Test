@@ -29,14 +29,6 @@ public partial class MainPage : ContentPage
     {
         results.Children.Clear();
 
-        var progressLabel = new Label()
-        {
-            HorizontalOptions = LayoutOptions.Center,
-            Margin = new Thickness(0, 10)
-        };
-
-        results.Children.Add(progressLabel);
-
         var connectionString = Constants.WindowsConnectionString;
         //skip certificate validation - why is this or Encrypt=false needed in MAUI (even for integrated security = Windows authentication)
         //but not needed in WinForms or Blazor (non-MAUI) at all?
