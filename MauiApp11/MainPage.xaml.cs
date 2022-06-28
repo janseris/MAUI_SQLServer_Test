@@ -97,6 +97,7 @@ public partial class MainPage : ContentPage
             });
         }
 
+        //these texts should be displayed below the button
         foreach(var label in results.Children)
         {
             Trace.WriteLine((label as Label).Text);
