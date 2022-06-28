@@ -1,5 +1,9 @@
 ﻿using DAL.Shared;
 
+using System.Diagnostics;
+
+using static System.Net.Mime.MediaTypeNames;
+
 namespace MauiApp11;
 
 public partial class MainPage : ContentPage
@@ -55,11 +59,13 @@ public partial class MainPage : ContentPage
             var sex = ex as Microsoft.Data.SqlClient.SqlException;
             return $"{sex.GetType()} Class: {sex.Class}, Number: {sex.Number}, Message: {sex.Message}";
         }
+#if WINDOWS
         if (ex is System.Data.SqlClient.SqlException) //why not available on Android?
         {
             var sex = ex as Microsoft.Data.SqlClient.SqlException;
             return $"{sex.GetType()} Class: {sex.Class}, Number: {sex.Number}, Message: {sex.Message}";
         }
+#endif
         return $"{ex.GetType()}, {ex.Message}";
     }
 
@@ -67,11 +73,20 @@ public partial class MainPage : ContentPage
     {
         results.Children.Clear();
 
+        var progressLabel = new Label()
+        {
+            HorizontalOptions = LayoutOptions.Center,
+            Margin = new Thickness(0, 10)
+        };
+
+        results.Children.Add(progressLabel);
+
         var connectionString = Constants.LocalNetworkConnectionString;
         connectionString += "TrustServerCertificate=true"; //skip certificate validation
 
         foreach (var dao in DAOs)
         {
+            progressLabel.Text = $"Executing {dao.Name}...";
             var result = ExecuteDAO(dao, connectionString);
             var text = $"{dao.Name}: {result}";
             results.Add(new Label()
@@ -81,6 +96,13 @@ public partial class MainPage : ContentPage
                 Margin = new Thickness(0, 10)
             });
         }
+
+        foreach(var label in results.Children)
+        {
+            Trace.WriteLine((label as Label).Text);
+        }
+
+        progressLabel.Text = "Finished";
     }
 }
 
