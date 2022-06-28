@@ -29,15 +29,9 @@ public partial class MainPage : ContentPage
     {
         results.Children.Clear();
 
-        var connectionString = Constants.WindowsConnectionString;
-        //skip certificate validation - why is this or Encrypt=false needed in MAUI (even for integrated security = Windows authentication)
-        //but not needed in WinForms or Blazor (non-MAUI) at all?
-        //this does not help on the Android issue
-        //connectionString += "TrustServerCertificate=true;"; 
-        
-        //with this, Windows authentication and also SQL authentication on Windows
-        //does not require a trusted certificate for the (local) SQL Server (Express)
-        //on Android, this does not solve the pre-login handshake problem
+        var connectionString = Constants.LocalNetworkConnectionString;
+
+        connectionString += "TrustServerCertificate=true;"; 
         connectionString += "Encrypt=false;";
 
         var DAOs = DAOsHelper.DAOs;
