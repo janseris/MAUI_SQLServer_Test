@@ -72,17 +72,12 @@ public partial class MainPage : ContentPage
                 usersCountLabel.Text = $"Loaded {users.Count} users";
             }
         }
-        catch (SqlException ex)
+        catch (Exception ex)
         {
             if(ex.Message == AndroidSqlClientBugMessage)
             {
                 Trace.WriteLine("The connection string is OK but Android SqlClient bug occurred.");
             }
-            usersCountLabel.Text = $"{ex.GetType()} {ex.Message}";
-        }
-        catch (Exception ex)
-        {
-            usersCountLabel.Text = $"{ex.GetType()} {ex.Message}";
         }
     }
 }

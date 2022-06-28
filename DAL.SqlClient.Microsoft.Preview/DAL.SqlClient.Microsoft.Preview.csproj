@@ -10,4 +10,8 @@
     <PackageReference Include="Microsoft.Data.SqlClient" Version="5.0.0-preview3.22168.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\DAL.Shared\DAL.Shared.csproj" />
+  </ItemGroup>
+
 </Project>

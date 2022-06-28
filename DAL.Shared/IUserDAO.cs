@@ -1,8 +1,7 @@
 ﻿namespace DAL.Shared
 {
-    public interface IUsersDAO
+    public interface IUserDAO
     {
         int GetUsersCount(string connectionString);
-        int GetUsersCount();
     }
 }
