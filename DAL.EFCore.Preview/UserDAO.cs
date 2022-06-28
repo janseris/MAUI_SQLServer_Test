@@ -1,6 +1,8 @@
-﻿using DAL.Shared;
+﻿using DAL.EFCore.Preview.Models;
+using DAL.Shared;
 
 using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 
 namespace DAL.EFCore.Preview
 {
@@ -8,6 +10,9 @@ namespace DAL.EFCore.Preview
     {
         public int GetUsersCount(string connectionString)
         {
+            DbContextOptionsBuilder<OrdinaceContext> builder = new DbContextOptionsBuilder<OrdinaceContext>();
+            builder.UseSqlServer(connectionString);
+            var parameters = builder.Options;
             using (var connection = new SqlConnection(connectionString))
             {
                 connection.Open();

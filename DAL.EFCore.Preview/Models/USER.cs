@@ -3,7 +3,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace MauiApp11.Models
+namespace DAL.EFCore.Preview.Models
 {
     public partial class USER
     {

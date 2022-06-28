@@ -49,8 +49,13 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.6" />
-	  <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.6" />
+	  <ProjectReference Include="..\DAL.EFCore.Preview\DAL.EFCore.Preview.csproj" />
+	  <ProjectReference Include="..\DAL.EF\DAL.EFCore.csproj" />
+	  <ProjectReference Include="..\DAL.Shared\DAL.Shared.csproj" />
+	  <ProjectReference Include="..\DAL.SqlClient.Microsoft.OldVersion\DAL.SqlClient.Microsoft.OldVersion.csproj" />
+	  <ProjectReference Include="..\DAL.SqlClient.Microsoft.Preview\DAL.SqlClient.Microsoft.Preview.csproj" />
+	  <ProjectReference Include="..\DAL.SqlClient.Microsoft\DAL.SqlClient.Microsoft.csproj" />
+	  <ProjectReference Include="..\DAL.SqlClient.System\DAL.SqlClient.System.csproj" />
 	</ItemGroup>
 
 </Project>

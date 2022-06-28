@@ -1,4 +1,5 @@
-﻿using DAL.Shared;
+﻿using DAL.EFCore.Models;
+using DAL.Shared;
 
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
