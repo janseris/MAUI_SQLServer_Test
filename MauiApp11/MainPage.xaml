@@ -9,6 +9,12 @@
             Padding="30,0" 
             VerticalOptions="Center" >
 
+            <Label 
+                Text="Microsoft.Data.SqlClient 4.0.0+ has Encrypt=true by default which requires a valid certificate (can be disabled either by explicit Encrypt=false or TrustServerCertificate=true"
+                HorizontalOptions="Center" >
+                
+            </Label>
+
             <Button 
                 x:Name="button"
                 Text="Execute DB calls"

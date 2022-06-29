@@ -13,7 +13,7 @@ public partial class MainPage : ContentPage
         InitializeComponent();
     }
 
-    private void ExecuteDAOWithUIResult(UserDAOBase dao, string connectionString, StackLayout results)
+    private void ExecuteDAOWithUIResult(DAOBase dao, string connectionString, StackLayout results)
     {
         var result = DAOsHelper.ExecuteDAO(dao, connectionString);
         var text = $"{dao.Name}: {result}";
@@ -29,10 +29,11 @@ public partial class MainPage : ContentPage
     {
         results.Children.Clear();
 
-        var connectionString = Constants.LocalNetworkConnectionString;
+        //var connectionString = Constants.LocalNetworkConnectionString;
+        var connectionString = "Server=LAPTOP-HGEN5Q27\\SQLEXPRESS;Database=Ordinace;Integrated Security=True;";
 
-        connectionString += "TrustServerCertificate=true;"; 
-        connectionString += "Encrypt=false;";
+        //connectionString += "TrustServerCertificate=true;"; 
+        //connectionString += "Encrypt=false;";
 
         var DAOs = DAOsHelper.DAOs;
 

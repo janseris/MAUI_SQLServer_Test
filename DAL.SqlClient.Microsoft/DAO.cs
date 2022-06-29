@@ -2,11 +2,11 @@
 
 using Microsoft.Data.SqlClient;
 
-namespace DAL.SqlClient.Microsoft.OldVersion
+namespace DAL.SqlClient.Microsoft
 {
-    public class UserDAO : UserDAOBase
+    public class DAO : DAOBase
     {
-        public override int GetUsersCount(string connectionString)
+        public override int GetDBCallResult(string connectionString)
         {
             using (var connection = new SqlConnection(connectionString))
             {

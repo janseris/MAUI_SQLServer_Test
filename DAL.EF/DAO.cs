@@ -1,18 +1,14 @@
-﻿using DAL.EFCore6.Current.Models;
-using DAL.Shared;
+﻿using DAL.Shared;
 
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 
 namespace DAL.EFCore6.Current
 {
-    public class UserDAO : UserDAOBase
+    public class DAO : DAOBase
     {
-        public override int GetUsersCount(string connectionString)
+        public override int GetDBCallResult(string connectionString)
         {
-            DbContextOptionsBuilder<OrdinaceContext> builder = new DbContextOptionsBuilder<OrdinaceContext>();
-            builder.UseSqlServer(connectionString);
-            var parameters = builder.Options;
             using (var connection = new SqlConnection(connectionString))
             {
                 connection.Open();

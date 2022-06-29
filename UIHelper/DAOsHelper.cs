@@ -6,24 +6,24 @@ namespace UIHelper
 {
     public class DAOsHelper
     {
-        public static readonly UserDAOBase EFCore6OlderDAO = new DAL.EFCore6.Older.UserDAO() { Name = "Microsoft.Data.SqlClient 2.1.4 (EF Core 6.0.1)" };
-        public static readonly UserDAOBase EFCore6CurrentDAO = new DAL.EFCore6.Current.UserDAO() { Name = "Microsoft.Data.SqlClient 2.1.4 (EF Core 6.0.6)" };
-        public static readonly UserDAOBase EFCore7PreviewDAO = new DAL.EFCore.Preview.UserDAO() { Name = "Microsoft.Data.SqlClient 5.0.0-preview2.22096.2 (EF Core 7.0.0-preview.5.22302.2)" };
+        public static readonly DAOBase EFCore6OlderDAO = new DAL.EFCore6.Older.DAO() { Name = "Microsoft.Data.SqlClient 2.1.4 (EF Core 6.0.1)" };
+        public static readonly DAOBase EFCore6CurrentDAO = new DAL.EFCore6.Current.DAO() { Name = "Microsoft.Data.SqlClient 2.1.4 (EF Core 6.0.6)" };
+        public static readonly DAOBase EFCore7PreviewDAO = new DAL.EFCore.Preview.DAO() { Name = "Microsoft.Data.SqlClient 5.0.0-preview2.22096.2 (EF Core 7.0.0-preview.5.22302.2)" };
 
-        public static readonly UserDAOBase microsoftSqlClientOldVersionDAO = new DAL.SqlClient.Microsoft.OldVersion.UserDAO() { Name = "Microsoft.Data.SqlClient 4.1.0" };
-        public static readonly UserDAOBase microsoftSqlClientCurrentVersionDAO = new DAL.SqlClient.Microsoft.UserDAO() { Name = "Microsoft.Data.SqlClient 2.0.0" };
-        public static readonly UserDAOBase microsoftSqlClientPreviewVersionDAO = new DAL.SqlClient.Microsoft.Preview.UserDAO() { Name = "Microsoft.Data.SqlClient 5.0.0-preview3.22168.1" };
+        public static readonly DAOBase MicrosoftSqlClientOldVersionDAO = new DAL.SqlClient.Microsoft.OldVersion.DAO() { Name = "Microsoft.Data.SqlClient 4.1.0" };
+        public static readonly DAOBase MicrosoftSqlClientCurrentVersionDAO = new DAL.SqlClient.Microsoft.DAO() { Name = "Microsoft.Data.SqlClient 2.0.0" };
+        public static readonly DAOBase MicrosoftSqlClientPreviewVersionDAO = new DAL.SqlClient.Microsoft.Preview.DAO() { Name = "Microsoft.Data.SqlClient 5.0.0-preview3.22168.1" };
 
-        public static readonly UserDAOBase systemSqlClientVersionDAO = new DAL.SqlClient.Microsoft.Preview.UserDAO() { Name = "System.Data.SqlClient 4.8.3" };
+        public static readonly DAOBase SystemSqlClientVersionDAO = new DAL.SqlClient.Microsoft.Preview.DAO() { Name = "System.Data.SqlClient 4.8.3" };
 
 
-        public static List<UserDAOBase> DAOs
+        public static List<DAOBase> DAOs
         {
-            get => new List<UserDAOBase>
+            get => new List<DAOBase>
         {
             EFCore6OlderDAO, EFCore6CurrentDAO, EFCore7PreviewDAO,
-            microsoftSqlClientOldVersionDAO, microsoftSqlClientCurrentVersionDAO, microsoftSqlClientPreviewVersionDAO,
-            systemSqlClientVersionDAO
+            MicrosoftSqlClientOldVersionDAO, MicrosoftSqlClientCurrentVersionDAO, MicrosoftSqlClientPreviewVersionDAO,
+            SystemSqlClientVersionDAO
         };
 
 
@@ -37,12 +37,12 @@ namespace UIHelper
         /// <param name="dao"></param>
         /// <param name="connectionString"></param>
         /// <returns></returns>
-        public static string ExecuteDAO(UserDAOBase dao, string connectionString)
+        public static string ExecuteDAO(DAOBase dao, string connectionString)
         {
             Stopwatch s = Stopwatch.StartNew();
             try
             {
-                dao.GetUsersCount(connectionString);
+                dao.GetDBCallResult(connectionString);
                 var duration = StopAndGetDuration(s);
                 return $"{duration} success";
             }

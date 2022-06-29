@@ -55,17 +55,19 @@
         //1433 inbound rule permitting TCP traffic must be enabled in firewall on the device where SQL Server is running
         //SQL Server must allow TCP connection
         //SQL Server must allow SQL authentication
-        public const string LocalNetworkConnectionString = "Server=192.168.0.234;Database=Ordinace;User Id=sa;Password=sa;";
+        public const string LocalNetworkConnectionString = "Server=192.168.0.234;Database=devRemin;User Id=sa;Password=sa;";
         
         //1433 firewall rule is not required
         //SQL Server must allow TCP connection
         //SQL Server must allow SQL authentication
-        public const string AndroidEmulatorConnectionString = "Server=10.0.2.2;Database=Ordinace;User Id=sa;Password=sa;";
+        public const string AndroidEmulatorConnectionString = "Server=10.0.2.2;Database=devRemin;User Id=sa;Password=sa;";
         
         //does not use SQL authentication - only possible on the same machine where SQL Server Express is hosted
-        public const string WindowsConnectionString ="Server=.\\SQLEXPRESS;Database=Ordinace;Integrated Security=True;";
+        public const string WindowsConnectionString ="Server=.\\SQLEXPRESS;Database=devRemin;Integrated Security=True;";
 
-        public const string SQLQuery = "SELECT COUNT(*) FROM [Ordinace].[dbo].[USER]";
-
+        /// <summary>
+        /// A dummy DB call which requires no table and returns 11 (the length of <c>Hello World</c> string)
+        /// </summary>
+        public const string SQLQuery = "SELECT LEN('Hello World')";
     }
 }

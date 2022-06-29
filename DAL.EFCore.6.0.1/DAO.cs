@@ -1,12 +1,12 @@
 ﻿using DAL.Shared;
 
-using System.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 
-namespace DAL.SqlClient.System
+namespace DAL.EFCore6.Older
 {
-    public class UserDAO : UserDAOBase
+    public class DAO : DAOBase
     {
-        public override int GetUsersCount(string connectionString)
+        public override int GetDBCallResult(string connectionString)
         {
             using (var connection = new SqlConnection(connectionString))
             {
