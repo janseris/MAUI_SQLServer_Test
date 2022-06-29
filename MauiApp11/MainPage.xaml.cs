@@ -117,12 +117,18 @@ public partial class MainPage : ContentPage
         });
     }
 
-    private void button_Clicked(object sender, EventArgs e)
+    private async void button_Clicked(object sender, EventArgs e)
     {
         results.Children.Clear();
 
         //use custom or from combobox if using custom is not checked
         var connectionString = useCustomConnectionStringCheckBox.IsChecked ? customConnectionStringTextEdit.Text : SelectedConnectionString;
+
+        if(connectionString == null)
+        {
+            await DisplayAlert("", "No connection string selected", "OK");
+            return;
+        }
 
         //for appended parts to work, the connection string must end with ";"
         if (encryptFalseCheckBox.IsChecked)
@@ -149,12 +155,21 @@ public partial class MainPage : ContentPage
             Trace.WriteLine($"Executing {dao.Name}...");
             ExecuteDAOWithUIResult(dao, connectionString, results);
         }
-
+        
         //these texts should be displayed below the button
         foreach (var label in results.Children)
         {
             Trace.WriteLine((label as Label).Text);
         }
+
+
+        //Labels are not displayed on Android (bug) so instead, a MessageBox is shown
+#if ANDROID
+        var labelTexts = results.Children
+            .Where(item => item.GetType() == typeof(Label))
+            .Select(label => (label as Label).Text);
+        await DisplayActionSheet("Results", null, "OK", labelTexts.ToArray());
+#endif
     }
 }
 
