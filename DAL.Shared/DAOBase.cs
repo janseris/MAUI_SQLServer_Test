@@ -3,6 +3,12 @@
     public abstract class DAOBase
     {
         public string Name { get; set; }
-        public abstract int GetDBCallResult(string connectionString);
+        
+        /// <summary>
+        /// Result and connection ID as string
+        /// </summary>
+        /// <param name="connectionString"></param>
+        /// <returns></returns>
+        public abstract (int, string) GetDBCallResult(string connectionString);
     }
 }

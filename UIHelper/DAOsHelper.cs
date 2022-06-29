@@ -42,9 +42,9 @@ namespace UIHelper
             Stopwatch s = Stopwatch.StartNew();
             try
             {
-                dao.GetDBCallResult(connectionString);
+                var result = dao.GetDBCallResult(connectionString);
                 var duration = StopAndGetDuration(s);
-                return $"{duration} success";
+                return $"{duration} success [connection ID: {result.Item2}]";
             }
             catch (Exception ex)
             {

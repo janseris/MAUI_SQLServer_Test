@@ -1,6 +1,4 @@
-﻿using ObjCRuntime;
-
-using UIKit;
+﻿using UIKit;
 
 namespace MauiApp11.Platforms.MacCatalyst;
 

@@ -29,6 +29,10 @@
                     <CheckBox x:Name="trustServerCertificateCheckBox" />
                 </HorizontalStackLayout>
                 <HorizontalStackLayout>
+                    <Label>Disable connection pooling</Label>
+                    <CheckBox x:Name="disableConnectionPoolingCheckBox" />
+                </HorizontalStackLayout>
+                <HorizontalStackLayout>
                     <Label>Use custom connection string</Label>
                     <CheckBox x:Name="useCustomConnectionStringCheckBox" />
                 </HorizontalStackLayout>

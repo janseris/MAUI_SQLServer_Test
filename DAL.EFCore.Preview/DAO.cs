@@ -2,22 +2,23 @@
 
 using Microsoft.Data.SqlClient;
 
-using System.Diagnostics;
-
 namespace DAL.EFCore.Preview
 {
     public class DAO : DAOBase
     {
-        public override int GetDBCallResult(string connectionString)
+        public override (int, string) GetDBCallResult(string connectionString)
         {
             using (var connection = new SqlConnection(connectionString))
             {
+                //TEST
+                //SqlConnection.ClearPool(connection);
+
                 connection.Open();
-                Trace.WriteLine($"Connection: {connection.ClientConnectionId}");
                 var command = new SqlCommand(Constants.SQLQuery);
                 command.Connection = connection;
                 var numberOfUsers = command.ExecuteNonQuery();
-                return numberOfUsers;
+
+                return (numberOfUsers, connection.ClientConnectionId.ToString());
             }
         }
     }

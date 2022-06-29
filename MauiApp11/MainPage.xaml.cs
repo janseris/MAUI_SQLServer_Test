@@ -50,7 +50,7 @@ public partial class MainPage : ContentPage
     private readonly Picker connectionStringComboBox = new Picker { Title = "Select a connection string" };
     private readonly Editor customConnectionStringTextEdit = new Editor { 
         Placeholder = "custom connection string",
-        HeightRequest = 150
+        HeightRequest = 80
     };
 
 
@@ -62,7 +62,7 @@ public partial class MainPage : ContentPage
         {
             HorizontalOptions = LayoutOptions.Center,
             Text = text,
-            Margin = new Thickness(0, 10)
+            Margin = new Thickness(0, 5)
         });
     }
 
@@ -73,6 +73,7 @@ public partial class MainPage : ContentPage
         //use custom or from combobox if using custom is not checked
         var connectionString = useCustomConnectionStringCheckBox.IsChecked ? customConnectionStringTextEdit.Text : SelectedConnectionString;
 
+        //for appended parts to work, the connection string must end with ";"
         if (encryptFalseCheckBox.IsChecked)
         {
             connectionString += "Encrypt=false;";
@@ -85,8 +86,12 @@ public partial class MainPage : ContentPage
         {
             connectionString += "TrustServerCertificate=true;";
         }
+        if (disableConnectionPoolingCheckBox.IsChecked)
+        {
+            connectionString += "Pooling=false;";
+        }
 
-        Trace.WriteLine($"Using connection string: {connectionString}");
+        Trace.WriteLine($"Calling the database with connection string: {connectionString}");
 
         var DAOs = DAOsHelper.DAOs;
 
