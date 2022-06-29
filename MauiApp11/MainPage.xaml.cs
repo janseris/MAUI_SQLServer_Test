@@ -15,6 +15,57 @@ public partial class MainPage : ContentPage
         InitializeConnectionStringTextEdit();
 
         useCustomConnectionStringCheckBox.CheckedChanged += UseCustomConnectionStringCheckBox_CheckedChanged;
+
+        AddDAOCheckBoxes();
+
+        selectAllDAOsButton.Clicked += (s, e) => SelectDAOs(DAOs);
+        selectNoDAOsButton.Clicked += (s, e) => SelectDAOs(new List<DAOBase>());
+    }
+
+    private readonly List<DAOBase> DAOs = DAOsHelper.DAOs;
+    private readonly Dictionary<DAOBase, CheckBox> DAOCheckBoxes = new Dictionary<DAOBase, CheckBox>();
+    private List<DAOBase> SelectedDAOs { get => GetSelectedDAOs(); set => SelectDAOs(value); }
+
+    private void AddDAOCheckBoxes()
+    {
+        foreach(var DAO in DAOs)
+        {
+            var label = new Label() { Text = DAO.Name, VerticalOptions = LayoutOptions.Center };
+            var checkBox = new CheckBox() { IsChecked = true, VerticalOptions = LayoutOptions.Center };
+            var namedCheckBoxContainer = new HorizontalStackLayout();
+            namedCheckBoxContainer.Children.Add(checkBox);
+            namedCheckBoxContainer.Children.Add(label);
+            SqlClientCheckBoxesContainer.Add(namedCheckBoxContainer);
+            DAOCheckBoxes.Add(DAO, checkBox);
+        }
+    }
+
+    private List<DAOBase> GetSelectedDAOs()
+    {
+        var selected = new List<DAOBase>();
+        foreach(var DAO in DAOCheckBoxes.Keys)
+        {
+            if (DAOCheckBoxes[DAO].IsChecked)
+            {
+                selected.Add(DAO);
+            }
+        }
+        return selected;
+    }
+
+    private void SelectDAOs(List<DAOBase> items)
+    {
+        foreach (var DAO in this.DAOs)
+        {
+            var checkbox = DAOCheckBoxes[DAO];
+            checkbox.IsChecked = false;
+        }
+
+        foreach (var DAO in items)
+        {
+            var checkbox = DAOCheckBoxes[DAO];
+            checkbox.IsChecked = true;
+        }
     }
 
     private void UseCustomConnectionStringCheckBox_CheckedChanged(object sender, CheckedChangedEventArgs e)
@@ -49,7 +100,7 @@ public partial class MainPage : ContentPage
     private string SelectedConnectionString { get; set; }
     private readonly Picker connectionStringComboBox = new Picker { Title = "Select a connection string" };
     private readonly Editor customConnectionStringTextEdit = new Editor { 
-        Placeholder = "custom connection string",
+        Placeholder = "enter a custom connection string",
         HeightRequest = 80
     };
 
@@ -93,9 +144,7 @@ public partial class MainPage : ContentPage
 
         Trace.WriteLine($"Calling the database with connection string: {connectionString}");
 
-        var DAOs = DAOsHelper.DAOs;
-
-        foreach (var dao in DAOs)
+        foreach (var dao in this.SelectedDAOs)
         {
             Trace.WriteLine($"Executing {dao.Name}...");
             ExecuteDAOWithUIResult(dao, connectionString, results);

@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MauiApp11.MainPage">
-			 
+
     <ScrollView>
         <VerticalStackLayout 
             Spacing="25" 
@@ -15,29 +15,49 @@
 
             </Label>
 
-            <StackLayout>
-                <HorizontalStackLayout>
-                    <Label>Add Encrypt=false</Label>
-                    <CheckBox x:Name="encryptFalseCheckBox" />
-                </HorizontalStackLayout>
-                <HorizontalStackLayout>
-                    <Label>Add Encrypt=true</Label>
-                    <CheckBox x:Name="encryptTrueCheckBox" />
-                </HorizontalStackLayout>
-                <HorizontalStackLayout>
-                    <Label>Add TrustServerCertificate=true</Label>
-                    <CheckBox x:Name="trustServerCertificateCheckBox" />
-                </HorizontalStackLayout>
-                <HorizontalStackLayout>
-                    <Label>Disable connection pooling</Label>
-                    <CheckBox x:Name="disableConnectionPoolingCheckBox" />
-                </HorizontalStackLayout>
-                <HorizontalStackLayout>
-                    <Label>Use custom connection string</Label>
-                    <CheckBox x:Name="useCustomConnectionStringCheckBox" />
-                </HorizontalStackLayout>
-            </StackLayout>
-            
+            <VerticalStackLayout>
+
+                <Label Margin="0, 10">Select used SQL libraries</Label>
+
+                <Frame BorderColor="{DynamicResource Primary}" CornerRadius="5">
+                    <StackLayout x:Name="SqlClientCheckBoxesContainer">
+                        <HorizontalStackLayout Spacing="10" Margin="0, 0, 0, 10">
+                            <Button Text="Select all" x:Name="selectAllDAOsButton"></Button>
+                            <Button Text="Select none" x:Name="selectNoDAOsButton"></Button>
+                        </HorizontalStackLayout>
+                    </StackLayout>
+                </Frame>
+
+                <Label Margin="0, 10">Additional connection string settings (connection string must end by ";")</Label>
+
+                <Frame BorderColor="{DynamicResource Primary}" CornerRadius="5">
+                    <StackLayout>
+                        <!-- TODO: how to prevent copypasting vertical options on all items but instead specify them on the container for children? -->
+                        <HorizontalStackLayout>
+                            <CheckBox VerticalOptions="Center" x:Name="encryptFalseCheckBox" />
+                            <Label VerticalOptions="Center">Add Encrypt=false</Label>
+                        </HorizontalStackLayout>
+                        <HorizontalStackLayout>
+                            <CheckBox VerticalOptions="Center" x:Name="encryptTrueCheckBox" />
+                            <Label VerticalOptions="Center">Add Encrypt=true</Label>
+                        </HorizontalStackLayout>
+                        <HorizontalStackLayout>
+                            <CheckBox VerticalOptions="Center" x:Name="trustServerCertificateCheckBox"/>
+                            <Label VerticalOptions="Center">Add TrustServerCertificate=true</Label>
+                        </HorizontalStackLayout>
+                        <HorizontalStackLayout>
+                            <CheckBox VerticalOptions="Center" x:Name="disableConnectionPoolingCheckBox" />
+                            <Label VerticalOptions="Center">Disable connection pooling</Label>
+                        </HorizontalStackLayout>
+                        <HorizontalStackLayout>
+                            <CheckBox VerticalOptions="Center" x:Name="useCustomConnectionStringCheckBox" />
+                            <Label VerticalOptions="Center">Use custom connection string</Label>
+                        </HorizontalStackLayout>
+                    </StackLayout>
+                </Frame>
+
+            </VerticalStackLayout>
+
             <StackLayout x:Name="container">
             </StackLayout>
 
@@ -48,10 +68,10 @@
                 HorizontalOptions="Center" />
 
             <StackLayout x:Name="results">
-                
+
             </StackLayout>
 
         </VerticalStackLayout>
     </ScrollView>
- 
+
 </ContentPage>
