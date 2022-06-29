@@ -12,8 +12,30 @@
             <Label 
                 Text="Microsoft.Data.SqlClient 4.0.0+ has Encrypt=true by default which requires a valid certificate (can be disabled either by explicit Encrypt=false or TrustServerCertificate=true"
                 HorizontalOptions="Center" >
-                
+
             </Label>
+
+            <StackLayout>
+                <HorizontalStackLayout>
+                    <Label>Add Encrypt=false</Label>
+                    <CheckBox x:Name="encryptFalseCheckBox" />
+                </HorizontalStackLayout>
+                <HorizontalStackLayout>
+                    <Label>Add Encrypt=true</Label>
+                    <CheckBox x:Name="encryptTrueCheckBox" />
+                </HorizontalStackLayout>
+                <HorizontalStackLayout>
+                    <Label>Add TrustServerCertificate=true</Label>
+                    <CheckBox x:Name="trustServerCertificateCheckBox" />
+                </HorizontalStackLayout>
+                <HorizontalStackLayout>
+                    <Label>Use custom connection string</Label>
+                    <CheckBox x:Name="useCustomConnectionStringCheckBox" />
+                </HorizontalStackLayout>
+            </StackLayout>
+            
+            <StackLayout x:Name="container">
+            </StackLayout>
 
             <Button 
                 x:Name="button"

@@ -11,7 +11,48 @@ public partial class MainPage : ContentPage
     public MainPage()
     {
         InitializeComponent();
+        InitializeConnectionStringComboBox();
+        InitializeConnectionStringTextEdit();
+
+        useCustomConnectionStringCheckBox.CheckedChanged += UseCustomConnectionStringCheckBox_CheckedChanged;
     }
+
+    private void UseCustomConnectionStringCheckBox_CheckedChanged(object sender, CheckedChangedEventArgs e)
+    {
+        customConnectionStringTextEdit.IsEnabled = e.Value;
+        connectionStringComboBox.IsEnabled = !e.Value;
+    }
+
+    private void InitializeConnectionStringComboBox()
+    {
+        container.Add(connectionStringComboBox);
+        connectionStringComboBox.ItemsSource = new List<string> { 
+            Constants.WindowsConnectionString,
+            Constants.AndroidEmulatorConnectionString,
+            Constants.LocalNetworkConnectionString
+        };
+        connectionStringComboBox.SelectedIndexChanged += ConnectionStringComboBox_SelectedIndexChanged;
+    }
+
+    private void InitializeConnectionStringTextEdit()
+    {
+        customConnectionStringTextEdit.IsEnabled = false;
+        container.Add(customConnectionStringTextEdit);
+    }
+
+    private void ConnectionStringComboBox_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        var comboBox = sender as Picker;
+        SelectedConnectionString = comboBox.SelectedItem as string;
+    }
+
+    private string SelectedConnectionString { get; set; }
+    private readonly Picker connectionStringComboBox = new Picker { Title = "Select a connection string" };
+    private readonly Editor customConnectionStringTextEdit = new Editor { 
+        Placeholder = "custom connection string",
+        HeightRequest = 150
+    };
+
 
     private void ExecuteDAOWithUIResult(DAOBase dao, string connectionString, StackLayout results)
     {
@@ -29,11 +70,23 @@ public partial class MainPage : ContentPage
     {
         results.Children.Clear();
 
-        //var connectionString = Constants.LocalNetworkConnectionString;
-        var connectionString = "Server=LAPTOP-HGEN5Q27\\SQLEXPRESS;Database=Ordinace;Integrated Security=True;";
+        //use custom or from combobox if using custom is not checked
+        var connectionString = useCustomConnectionStringCheckBox.IsChecked ? customConnectionStringTextEdit.Text : SelectedConnectionString;
 
-        //connectionString += "TrustServerCertificate=true;"; 
-        //connectionString += "Encrypt=false;";
+        if (encryptFalseCheckBox.IsChecked)
+        {
+            connectionString += "Encrypt=false;";
+        }
+        if (encryptTrueCheckBox.IsChecked)
+        {
+            connectionString += "Encrypt=true;";
+        }
+        if (trustServerCertificateCheckBox.IsChecked)
+        {
+            connectionString += "TrustServerCertificate=true;";
+        }
+
+        Trace.WriteLine($"Using connection string: {connectionString}");
 
         var DAOs = DAOsHelper.DAOs;
 
@@ -42,9 +95,9 @@ public partial class MainPage : ContentPage
             Trace.WriteLine($"Executing {dao.Name}...");
             ExecuteDAOWithUIResult(dao, connectionString, results);
         }
-        
+
         //these texts should be displayed below the button
-        foreach(var label in results.Children)
+        foreach (var label in results.Children)
         {
             Trace.WriteLine((label as Label).Text);
         }

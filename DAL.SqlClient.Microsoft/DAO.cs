@@ -2,6 +2,8 @@
 
 using Microsoft.Data.SqlClient;
 
+using System.Diagnostics;
+
 namespace DAL.SqlClient.Microsoft
 {
     public class DAO : DAOBase
@@ -11,6 +13,7 @@ namespace DAL.SqlClient.Microsoft
             using (var connection = new SqlConnection(connectionString))
             {
                 connection.Open();
+                Trace.WriteLine($"Connection: {connection.ClientConnectionId}");
                 var command = new SqlCommand(Constants.SQLQuery);
                 command.Connection = connection;
                 var numberOfUsers = command.ExecuteNonQuery();
