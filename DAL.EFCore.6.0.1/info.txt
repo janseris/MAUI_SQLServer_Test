@@ -1,0 +1,3 @@
+﻿I am using EF Core 6.0.1 in a Blazor Server project with .NET 6 backend on Windows
+with no need to enter TrustServerCertificate=true or Encrypt=false 
+and it had been connecting to SQL Server 2019 Express just fine without any certificate validation error.

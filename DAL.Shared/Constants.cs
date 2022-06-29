@@ -66,5 +66,6 @@
         public const string WindowsConnectionString ="Server=.\\SQLEXPRESS;Database=Ordinace;Integrated Security=True;";
 
         public const string SQLQuery = "SELECT COUNT(*) FROM [Ordinace].[dbo].[USER]";
+
     }
 }

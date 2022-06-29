@@ -4,7 +4,7 @@ using DAL.Shared;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 
-namespace DAL.EFCore6.Current
+namespace DAL.EFCore6.Older
 {
     public class UserDAO : UserDAOBase
     {

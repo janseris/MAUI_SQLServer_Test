@@ -50,7 +50,7 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\DAL.EFCore.Preview\DAL.EFCore.Preview.csproj" />
-	  <ProjectReference Include="..\DAL.EF\DAL.EFCore.csproj" />
+	  <ProjectReference Include="..\DAL.EF\DAL.EFCore6.Current.csproj" />
 	  <ProjectReference Include="..\DAL.Shared\DAL.Shared.csproj" />
 	  <ProjectReference Include="..\DAL.SqlClient.Microsoft.OldVersion\DAL.SqlClient.Microsoft.OldVersion.csproj" />
 	  <ProjectReference Include="..\DAL.SqlClient.Microsoft.Preview\DAL.SqlClient.Microsoft.Preview.csproj" />

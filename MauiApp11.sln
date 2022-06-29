@@ -5,19 +5,25 @@ VisualStudioVersion = 17.0.31611.283
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MauiApp11", "MauiApp11\MauiApp11.csproj", "{BEDBDAC4-D2D3-41A2-960C-1F9251615F26}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL.EFCore", "DAL.EF\DAL.EFCore.csproj", "{555FD393-86EF-429E-ADB5-FB4C0EAF354B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAL.EFCore6.Current", "DAL.EF\DAL.EFCore6.Current.csproj", "{555FD393-86EF-429E-ADB5-FB4C0EAF354B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL.SqlClient.System", "DAL.SqlClient.System\DAL.SqlClient.System.csproj", "{A10D86CD-DDEF-4D14-98C1-B25A8BB16269}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAL.SqlClient.System", "DAL.SqlClient.System\DAL.SqlClient.System.csproj", "{A10D86CD-DDEF-4D14-98C1-B25A8BB16269}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL.SqlClient.Microsoft", "DAL.SqlClient.Microsoft\DAL.SqlClient.Microsoft.csproj", "{B0526837-A62D-4036-8E5A-C1208197E939}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAL.SqlClient.Microsoft", "DAL.SqlClient.Microsoft\DAL.SqlClient.Microsoft.csproj", "{B0526837-A62D-4036-8E5A-C1208197E939}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL.SqlClient.Microsoft.Preview", "DAL.SqlClient.Microsoft.Preview\DAL.SqlClient.Microsoft.Preview.csproj", "{17288CA4-F262-4E49-AA09-14DCE695DA81}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAL.SqlClient.Microsoft.Preview", "DAL.SqlClient.Microsoft.Preview\DAL.SqlClient.Microsoft.Preview.csproj", "{17288CA4-F262-4E49-AA09-14DCE695DA81}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL.Shared", "DAL.Shared\DAL.Shared.csproj", "{EADB599D-CD9A-4AED-BEE6-0841975B2F8A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAL.Shared", "DAL.Shared\DAL.Shared.csproj", "{EADB599D-CD9A-4AED-BEE6-0841975B2F8A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL.SqlClient.Microsoft.OldVersion", "DAL.SqlClient.Microsoft.OldVersion\DAL.SqlClient.Microsoft.OldVersion.csproj", "{5FF7BCD7-371B-4E0B-8724-371E3E1A9A5B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAL.SqlClient.Microsoft.OldVersion", "DAL.SqlClient.Microsoft.OldVersion\DAL.SqlClient.Microsoft.OldVersion.csproj", "{5FF7BCD7-371B-4E0B-8724-371E3E1A9A5B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL.EFCore.Preview", "DAL.EFCore.Preview\DAL.EFCore.Preview.csproj", "{BFFBE23C-74B2-4B59-A86A-D9609745219A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAL.EFCore.Preview", "DAL.EFCore.Preview\DAL.EFCore.Preview.csproj", "{BFFBE23C-74B2-4B59-A86A-D9609745219A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp", "ConsoleApp\ConsoleApp.csproj", "{1303C484-1533-49B4-BBA7-3A283E601D7E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UIHelper", "UIHelper\UIHelper.csproj", "{0805C18F-C515-47E3-A4C8-E25C566646E6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL.EFCore6.Older", "DAL.EFCore.6.0.1\DAL.EFCore6.Older.csproj", "{AB27DD19-6494-48B0-BFDC-6B263B191791}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,6 +65,18 @@ Global
 		{BFFBE23C-74B2-4B59-A86A-D9609745219A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BFFBE23C-74B2-4B59-A86A-D9609745219A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BFFBE23C-74B2-4B59-A86A-D9609745219A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1303C484-1533-49B4-BBA7-3A283E601D7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1303C484-1533-49B4-BBA7-3A283E601D7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1303C484-1533-49B4-BBA7-3A283E601D7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1303C484-1533-49B4-BBA7-3A283E601D7E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0805C18F-C515-47E3-A4C8-E25C566646E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0805C18F-C515-47E3-A4C8-E25C566646E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0805C18F-C515-47E3-A4C8-E25C566646E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0805C18F-C515-47E3-A4C8-E25C566646E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB27DD19-6494-48B0-BFDC-6B263B191791}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB27DD19-6494-48B0-BFDC-6B263B191791}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB27DD19-6494-48B0-BFDC-6B263B191791}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB27DD19-6494-48B0-BFDC-6B263B191791}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
