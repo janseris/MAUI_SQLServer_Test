@@ -1,7 +1,6 @@
 ﻿using DAL.Shared;
 
 using System.Data.SqlClient;
-using System.Diagnostics;
 
 namespace DAL.SqlClient.System
 {
